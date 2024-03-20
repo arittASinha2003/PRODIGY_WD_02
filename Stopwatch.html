@@ -78,12 +78,16 @@
         let laps = 1;
 
         function startStopwatch() {
+            if (timerInterval) return;  // Add this line
             startTime = Date.now() - elapsedTime;
             timerInterval = setInterval(updateStopwatch, 10);
         }
 
         function pauseStopwatch() {
+            if (!timerInterval) return;  // Add this line
+            elapsedTime = Date.now() - startTime;  // Add this line
             clearInterval(timerInterval);
+            timerInterval = null;  // Add this line
         }
 
         function resetStopwatch() {
